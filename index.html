@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/">
+<title>PokerOut — Home Games, Simplified.</title>
+<meta name="description" content="Track buy-ins, manage rebuys and settle your home poker game in seconds.">
+<meta name="application-name" content="PokerOut">
+<meta name="apple-mobile-web-app-title" content="PokerOut">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PokerOut">
+<meta property="og:title" content="PokerOut — Home Games, Simplified.">
+<meta property="og:description" content="Track buy-ins, manage rebuys and settle your home poker game in seconds.">
+<meta property="og:url" content="__SITE_URL__/">
+<meta property="og:image" content="__SITE_URL__/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PokerOut — Home Games, Simplified.">
+<meta name="twitter:description" content="Track buy-ins, manage rebuys and settle your home poker game in seconds.">
+<meta name="twitter:image" content="__SITE_URL__/assets/og.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="preload" as="image" href="/assets/pokerout-logo.jpg">
+<style>html,body{margin:0;height:100%;background:#0D0D0F}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D0F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&amp;display=swap">
+<link rel="stylesheet" href="_ds/organic-2b16b2ba-9c60-4425-a3e5-afe815227d75/styles.css">
+<script src="_ds/organic-2b16b2ba-9c60-4425-a3e5-afe815227d75/_ds_bundle.js"></script>
+<script src="pokerout-core.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js" async></script>
+<style>
+:root{--color-bg:#0D0D0F;--color-surface:#18181B;--color-text:#F4EBDD;--color-accent:#C91F2D;--color-accent-600:#B01B28;--color-accent-700:#8F1520;--color-divider:rgba(244,235,221,.16);--font-heading:"Figtree",system-ui,sans-serif;--font-body:"Figtree",system-ui,sans-serif}
+html,body{margin:0;background:#0D0D0F;color:#F4EBDD;font-family:Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+a{color:#F4EBDD}a:hover{color:#C91F2D}
+input::placeholder{color:rgba(244,235,221,.32)}
+input{background:#0D0D0F}
+button:disabled{opacity:.4;cursor:not-allowed}
+div{scrollbar-width:none}div::-webkit-scrollbar{display:none}
+@keyframes po-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes po-logo-in{0%{opacity:0;transform:scale(.88) rotate(-10deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes po-halo{0%{opacity:0;transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
+@keyframes po-sweep{0%{transform:translateX(-180%) rotate(20deg);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateX(320%) rotate(20deg);opacity:0}}
+@keyframes po-ring{0%{opacity:0;transform:scale(.96)}40%{opacity:.9}100%{opacity:0;transform:scale(1.16)}}
+@keyframes po-word{from{opacity:0;transform:translateY(10px);letter-spacing:-.02em}to{opacity:1;transform:none;letter-spacing:-.045em}}
+@keyframes po-sheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes po-fade{from{opacity:0}to{opacity:1}}
+@keyframes po-pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+@keyframes po-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
+@keyframes po-toast{from{opacity:0;transform:translateY(-10px) scale(.96)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="width:100%;height:100cqh;position:relative;overflow:hidden;background:#0D0D0F;color:#F4EBDD;font-family:Figtree,system-ui,sans-serif;display:flex;justify-content:center">
+<div style="width:100%;max-width:520px;height:100%;position:relative;overflow:hidden;display:flex;flex-direction:column">
+
+<sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;padding:8px 20px;padding-top:calc(8px + env(safe-area-inset-top));background:#8F1520;color:#F4EBDD;font-size:13px;font-weight:600;text-align:center">You're offline — changes are saved on this device.</div>
+</sc-if>
+
+<sc-if value="{{ inGame }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;padding:12px 20px 8px;padding-top:calc(12px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;gap:12px">
+<div style="flex:1;min-width:0;display:flex;align-items:center;gap:12px">
+<div style="width:40px;height:40px;border-radius:50%;overflow:hidden;position:relative;flex:none"><img src="assets/pokerout-logo.jpg" alt="PokerOut" style="position:absolute;width:125%;height:125%;left:-12.3%;top:-10.3%;max-width:none"></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px">
+<div style="font-size:16px;line-height:20px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ top.gameName }}</div>
+<div style="font-size:13px;line-height:18px;font-weight:500;color:rgba(244,235,221,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ top.roleText }}</div>
+</div>
+</div>
+<div style="flex:none;display:flex;align-items:center;gap:4px">
+<button onClick="{{ openShare }}" aria-label="Game code" style="height:44px;min-width:84px;padding:0 16px;box-sizing:border-box;border-radius:999px;border:1px solid rgba(244,235,221,.2);background:#18181B;color:#F4EBDD;font-family:Figtree,system-ui;font-size:15px;line-height:1;font-weight:800;letter-spacing:.12em;text-indent:.12em;font-variant-numeric:tabular-nums;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#222226" style-active="background:#26262A">{{ top.code }}</button>
+<button onClick="{{ openMenu }}" aria-label="Menu" style="width:44px;height:44px;padding:0;border-radius:50%;border:0;background:transparent;color:#F4EBDD;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#18181B"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+</div>
+</div>
+<div style="flex:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:8px 20px 16px">
+<sc-for list="{{ stages }}" as="st" hint-placeholder-count="4">
+<div style="min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px">
+<div style="height:4px;border-radius:999px;background:{{ st.bar }};transition:background .4s"></div>
+<div style="font-size:clamp(10px,2.9cqw,11px);line-height:1.2;font-weight:800;letter-spacing:.1em;text-indent:.1em;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ st.color }}">{{ st.label }}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.loading }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:grid;place-items:center"><div style="width:64px;height:64px;border-radius:50%;overflow:hidden;position:relative;animation:po-breathe 1.6s ease-in-out infinite;opacity:.8"><img src="assets/pokerout-logo.jpg" alt="" style="position:absolute;width:125%;height:125%;left:-12.3%;top:-10.3%;max-width:none"></div></div>
+</sc-if>
+
+<sc-if value="{{ is.home }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:0 20px;padding-top:calc(40px + env(safe-area-inset-top));overflow-y:auto">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px;padding-bottom:24px">
+<div style="width:128px;height:128px;border-radius:50%;overflow:hidden;position:relative;flex:none;box-shadow:0 20px 60px rgba(201,31,45,.25);animation:po-logo-in .7s cubic-bezier(.2,.8,.2,1) both"><img src="assets/pokerout-logo.jpg" alt="PokerOut logo" style="position:absolute;width:125%;height:125%;left:-12.3%;top:-10.3%;max-width:none"></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;animation:po-up .6s .1s both">
+<div style="font-size:52px;line-height:.95;font-weight:900;letter-spacing:-.045em">Poker<span style="color:#C91F2D">Out</span></div>
+<div style="font-size:18px;line-height:1.4;font-weight:500;color:#D9CCBA;text-wrap:pretty">Home Games, Simplified.</div>
+<div style="font-size:12px;line-height:1.4;font-weight:800;letter-spacing:.3em;color:#D9CCBA;opacity:.75;text-align:center;text-indent:.3em;margin-top:12px">MADE BY P.A.C</div>
+</div>
+</div>
+<div style="flex:none;display:flex;flex-direction:column;gap:12px;padding-bottom:calc(20px + env(safe-area-inset-bottom));animation:po-up .6s .2s both">
+<button class="btn btn-primary" onClick="{{ goCreate }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">CREATE GAME</button>
+<button class="btn btn-secondary" onClick="{{ goJoin }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">JOIN GAME</button>
+<sc-if value="{{ showSample }}" hint-placeholder-val="{{ false }}"><button onClick="{{ sampleGame }}" style="height:44px;border:0;background:transparent;color:rgba(244,235,221,.6);font:600 13px Figtree,system-ui;cursor:pointer;text-decoration:underline;text-underline-offset:4px" style-hover="color:#F4EBDD">Try it with a sample table</button></sc-if>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.45);text-align:center">No payments, no gambling — PokerOut only does the maths.</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.create }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;padding-top:calc(12px + env(safe-area-inset-top));display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ goHome }}" aria-label="Back" style="width:44px;height:44px;margin-left:-10px;border-radius:50%;border:0;background:transparent;color:#F4EBDD;display:grid;place-items:center;cursor:pointer" style-hover="background:#18181B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em">New game</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">You'll host — you approve players, buy-ins and rebuys.</div>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Game name</span><input class="input" value="{{ f.gameName }}" onChange="{{ on.gameName }}" placeholder="Friday Poker" maxlength="40" style="height:56px;padding:0 20px;font-size:17px;font-weight:600"></label>
+<label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Your username</span><input class="input" value="{{ f.hostName }}" onChange="{{ on.hostName }}" placeholder="Thene" maxlength="20" autocomplete="nickname" style="height:56px;padding:0 20px;font-size:17px;font-weight:600"></label>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Buy-in per player</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ buyInChips }}" as="c" hint-placeholder-count="4">
+<button onClick="{{ c.pick }}" style="height:44px;padding:0 18px;border-radius:999px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:#F4EBDD;font:800 15px Figtree,system-ui;font-variant-numeric:tabular-nums;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+</div>
+<div style="position:relative"><span style="position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:17px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.buyIn }}" onChange="{{ on.buyIn }}" inputmode="numeric" placeholder="Other amount" style="height:56px;padding:0 20px 0 40px;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums"></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 14px 20px;border-radius:20px;background:#18181B">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0"><div style="font-size:16px;line-height:1.3;font-weight:700">Default rebuy</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">{{ rebuyNote }}</div></div>
+<button onClick="{{ toggleRebuy }}" class="btn btn-ghost" style="height:44px;padding:0 14px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#F4EBDD;flex:none">{{ rebuyToggleLabel }}</button>
+</div>
+<sc-if value="{{ f.customRebuy }}" hint-placeholder-val="{{ false }}">
+<div style="position:relative;margin-top:-12px"><span style="position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:17px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.rebuy }}" onChange="{{ on.rebuy }}" inputmode="numeric" placeholder="Rebuy amount" style="height:56px;padding:0 20px 0 40px;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums"></div>
+</sc-if>
+<sc-if value="{{ err.create }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ err.create }}</div></sc-if>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)"><button class="btn btn-primary" onClick="{{ createGame }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">CREATE GAME</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.join }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;padding-top:calc(12px + env(safe-area-inset-top));display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<button onClick="{{ goHome }}" aria-label="Back" style="width:44px;height:44px;margin-left:-10px;border-radius:50%;border:0;background:transparent;color:#F4EBDD;display:grid;place-items:center;cursor:pointer" style-hover="background:#18181B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em">{{ joinTitle }}</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Ask the host for the 4-digit code.</div>
+</div>
+<label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Game code</span><input class="input" value="{{ f.joinCode }}" onChange="{{ on.joinCode }}" inputmode="numeric" placeholder="0000" maxlength="4" autocomplete="off" style="height:72px;padding:0 24px;font-size:36px;font-weight:900;letter-spacing:.35em;font-variant-numeric:tabular-nums"></label>
+<sc-if value="{{ peekOk }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:10px;margin-top:-12px;padding:12px 16px;border-radius:20px;background:#18181B"><span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(53,184,107,.14);color:#35B86B;flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Game</span><span style="font-size:15px;line-height:1.4;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ peekText }}</span></div></sc-if>
+<sc-if value="{{ peekBad }}" hint-placeholder-val="{{ false }}"><div style="margin-top:-12px;font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ peekText }}</div></sc-if>
+<label style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Username</span><input class="input" value="{{ f.joinName }}" onChange="{{ on.joinName }}" placeholder="What the table calls you" maxlength="20" autocomplete="nickname" style="height:56px;padding:0 20px;font-size:17px;font-weight:600"></label>
+<sc-if value="{{ err.join }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:20px;background:rgba(224,82,82,.14);font-size:13px;line-height:1.4;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E05252" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg><span>{{ err.join }}</span></div></sc-if>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)"><button class="btn btn-primary" onClick="{{ joinGame }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">JOIN GAME</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.message }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;padding:0 20px;padding-top:calc(40px + env(safe-area-inset-top))">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;align-items:{{ msg.align }};text-align:{{ msg.textAlign }}">
+<sc-if value="{{ msg.pulse }}" hint-placeholder-val="{{ false }}">
+<div style="position:relative;width:96px;height:96px;flex:none"><div style="position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(201,31,45,.4),rgba(201,31,45,0) 70%);animation:po-breathe 2.4s ease-in-out infinite"></div><div style="position:absolute;inset:0;border-radius:50%;overflow:hidden"><img src="assets/pokerout-logo.jpg" alt="" style="position:absolute;width:125%;height:125%;left:-12.3%;top:-10.3%;max-width:none"></div></div>
+<div style="font-size:12px;line-height:1.4;font-weight:800;letter-spacing:.3em;color:#D9CCBA;opacity:.75;text-align:center;text-indent:.3em;margin-top:-8px">MADE BY P.A.C</div>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:12px;align-items:{{ msg.align }}">
+<div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:{{ msg.pill.bg }};color:{{ msg.pill.fg }}"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>{{ msg.pill.label }}</div>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em;text-wrap:pretty">{{ msg.title }}</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">{{ msg.body }}</div>
+</div>
+</div>
+<div style="flex:none;padding-bottom:calc(16px + env(safe-area-inset-bottom))"><button class="btn btn-secondary" onClick="{{ msg.action }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">{{ msg.actionLabel }}</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.buyin }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:8px 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(53,184,107,.14);color:#35B86B"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Approved</div>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em">Take your seat</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Pay {{ bi.hostName }} your buy-in at the table. It counts once they confirm it.</div>
+</div>
+<sc-if value="{{ bi.pending }}" hint-placeholder-val="{{ false }}">
+<div style="background:#18181B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px;animation:po-up .35s both">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Your buy-in</div><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(217,204,186,.14);color:#D9CCBA"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Pending</div></div>
+<div style="font-size:56px;line-height:1;font-weight:900;letter-spacing:-.045em;font-variant-numeric:tabular-nums">{{ bi.pendingText }}</div>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Waiting for {{ bi.hostName }} to confirm. This updates on its own.</div>
+</div>
+</sc-if>
+<sc-if value="{{ bi.choosing }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Buy-in</span>
+<div style="position:relative"><span style="position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:28px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.buyAmt }}" onChange="{{ on.buyAmt }}" inputmode="numeric" style="height:72px;padding:0 24px 0 50px;font-size:32px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums"></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ buyChips }}" as="c" hint-placeholder-count="3">
+<button onClick="{{ c.pick }}" style="height:44px;padding:0 18px;border-radius:999px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:#F4EBDD;font:800 15px Figtree,system-ui;font-variant-numeric:tabular-nums;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ err.buy }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ err.buy }}</div></sc-if>
+<sc-if value="{{ bi.wasRejected }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">The host declined your last buy-in. Check with them and try again.</div></sc-if>
+</div>
+</sc-if>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)">
+<sc-if value="{{ bi.choosing }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{ buyIn }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">BUY IN</button></sc-if>
+<sc-if value="{{ bi.pending }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" onClick="{{ cancelMyPending }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">CANCEL BUY-IN</button></sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.hostLive }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="background:#18181B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden">
+<div style="position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:22px solid rgba(201,31,45,.12)"></div>
+<div style="display:flex;flex-direction:column;gap:8px;position:relative">
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Total money in</div>
+<div style="font-size:56px;line-height:1;font-weight:900;letter-spacing:-.045em;font-variant-numeric:tabular-nums">{{ host.moneyInText }}</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:16px;border-top:1px solid rgba(244,235,221,.08);position:relative">
+<sc-for list="{{ host.stats }}" as="s" hint-placeholder-count="3">
+<div style="min-width:0;display:grid;grid-template-rows:auto auto;align-content:start;gap:4px"><div style="font-size:20px;line-height:24px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ s.color }}">{{ s.value }}</div><div style="font-size:clamp(11px,3.3cqw,13px);line-height:18px;font-weight:500;color:rgba(244,235,221,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.label }}</div></div>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{ host.hasRequests }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Needs your approval</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">{{ host.requestCount }}</div></div>
+<sc-for list="{{ requests }}" as="rq" hint-placeholder-count="0">
+<div style="display:flex;align-items:center;gap:12px;padding:12px;background:#18181B;border-radius:20px;border:1px solid rgba(201,31,45,.35);animation:po-up .35s both">
+<div style="width:40px;height:40px;border-radius:50%;background:#26262A;display:grid;place-items:center;font-size:16px;font-weight:800;flex:none">{{ rq.initial }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ rq.name }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ rq.kind }} <span style="color:#F4EBDD;font-weight:800;font-variant-numeric:tabular-nums">{{ rq.amountText }}</span></div></div>
+<button onClick="{{ rq.reject }}" aria-label="Reject" class="btn btn-secondary" style="width:44px;height:44px;padding:0;color:#F4EBDD;border-color:rgba(244,235,221,.2);flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+<button onClick="{{ rq.approve }}" class="btn btn-primary" style="height:44px;padding:0 16px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#F4EBDD;flex:none">APPROVE</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:4px"><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Players</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Tap to view or correct</div></div>
+<sc-for list="{{ playerRows }}" as="pl" hint-placeholder-count="4">
+<button onClick="{{ pl.open }}" style="display:flex;align-items:center;gap:12px;padding:12px 0;border:0;border-bottom:1px solid rgba(244,235,221,.06);border-radius:0;background:transparent;color:#F4EBDD;text-align:left;cursor:pointer;font-family:inherit;width:100%" style-hover="opacity:.8" style-active="opacity:.6">
+<div style="width:40px;height:40px;border-radius:50%;background:#26262A;display:grid;place-items:center;font-size:16px;font-weight:800;flex:none;box-shadow:{{ pl.ring }}">{{ pl.initial }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pl.name }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pl.sub }}</div></div>
+<sc-if value="{{ pl.hasPill }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:{{ pl.pill.bg }};color:{{ pl.pill.fg }};flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>{{ pl.pill.label }}</div></sc-if>
+<sc-if value="{{ pl.hasMoney }}" hint-placeholder-val="{{ true }}"><div style="font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;flex:none">{{ pl.investedText }}</div></sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06);display:flex;flex-direction:column;gap:12px">
+<sc-if value="{{ host.footNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);text-align:center">{{ host.footNote }}</div></sc-if>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+<button class="btn btn-secondary" onClick="{{ openShare }}" style="height:56px;padding:0 16px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">INVITE</button>
+<sc-if value="{{ host.lobby }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{ startGame }}" disabled="{{ host.cantStart }}" style="height:56px;padding:0 16px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">START GAME</button></sc-if>
+<sc-if value="{{ host.playing }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" onClick="{{ openEnd }}" style="height:56px;padding:0 16px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:#C91F2D">END SESSION</button></sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.playerLive }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="background:#18181B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden">
+<div style="position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:22px solid rgba(201,31,45,.12)"></div>
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6);position:relative">Total invested</div>
+<div style="font-size:56px;line-height:1;font-weight:900;letter-spacing:-.045em;font-variant-numeric:tabular-nums;position:relative">{{ mine.investedText }}</div>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);position:relative">{{ mine.countText }}</div>
+</div>
+<sc-if value="{{ mine.lobby }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:12px;padding:16px;border-radius:20px;background:#18181B">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D9CCBA" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700">You're seated</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Waiting for {{ mine.hostName }} to start the game.</div></div>
+</div>
+</sc-if>
+<sc-if value="{{ mine.hasPending }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-radius:20px;border:1.5px dashed rgba(217,204,186,.35);animation:po-up .35s both">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums">{{ mine.pendingText }}</span><span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(217,204,186,.14);color:#D9CCBA"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Pending</span></div>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Rebuy waiting for host approval — not counted yet.</div>
+</div>
+<button onClick="{{ cancelMyPending }}" class="btn btn-ghost" style="height:44px;padding:0 14px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#F4EBDD;flex:none">CANCEL</button>
+</div>
+</sc-if>
+<div style="display:flex;flex-direction:column">
+<div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em;padding-bottom:8px">Your history</div>
+<sc-for list="{{ myHistory }}" as="h" hint-placeholder-count="1">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(244,235,221,.06)">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700">{{ h.label }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">{{ h.meta }}</div></div>
+<sc-if value="{{ h.hasPill }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:{{ h.pill.bg }};color:{{ h.pill.fg }};flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>{{ h.pill.label }}</div></sc-if>
+<div style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums;color:{{ h.color }};text-decoration:{{ h.strike }};flex:none">{{ h.amountText }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">At the table</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums">{{ table.count }} players · {{ table.totalText }} in</div></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ table.names }}" as="n" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 12px;border-radius:999px;background:#18181B;font-size:13px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#35B86B"></span>{{ n.name }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+<sc-if value="{{ mine.playing }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06);display:flex;flex-direction:column;gap:12px">
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);text-align:center">Need more chips?</div>
+<button class="btn btn-primary" onClick="{{ openRebuy }}" disabled="{{ mine.hasPending }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">{{ mine.rebuyLabel }}</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.playerEnded }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#26262A;color:rgba(244,235,221,.7)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Buy-ins locked</div>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em">Count your chips</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Enter exactly what you finished with. You can correct it until the host settles.</div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+<div style="background:#18181B;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">You invested</div><div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ mine.investedExact }}</div></div>
+<div style="background:#18181B;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:4px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Your P/L</div><div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:{{ mine.previewColor }}">{{ mine.previewText }}</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Your final stack</span>
+<div style="position:relative"><span style="position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:28px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.stack }}" onChange="{{ on.stack }}" inputmode="numeric" placeholder="0" style="height:72px;padding:0 24px 0 50px;font-size:32px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums"></div>
+<sc-if value="{{ err.stack }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ err.stack }}</div></sc-if>
+<sc-if value="{{ mine.submitted }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.4;font-weight:600;color:#D9CCBA"><span style="width:20px;height:20px;border-radius:50%;background:#35B86B;display:grid;place-items:center;flex:none;animation:po-pop .4s both"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0D0D0F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Submitted {{ mine.stackText }} · {{ mine.stacksIn }}</div></sc-if>
+</div>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)"><button class="btn btn-primary" onClick="{{ submitMyStack }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">{{ mine.submitLabel }}</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.hostEnded }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<sc-if value="{{ bal.isIncomplete }}" hint-placeholder-val="{{ false }}">
+<div style="background:#18181B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Final stacks</div>
+<div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ bal.headline }}</div>
+<div style="height:6px;border-radius:999px;background:#26262A;overflow:hidden"><div style="height:100%;width:{{ bal.pct }};background:#F4EBDD;border-radius:999px;transition:width .5s"></div></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;line-height:1.4;font-weight:600;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums"><span>Entered {{ bal.stacksText }}</span><span>Money in {{ bal.moneyInText }}</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ bal.isMismatch }}" hint-placeholder-val="{{ false }}">
+<div style="background:rgba(224,82,82,.1);border:1.5px solid #E05252;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:16px;animation:po-up .35s both">
+<div style="display:flex;gap:12px;align-items:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E05252" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Numbers don't match</div></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.7)">Money in</div><div style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums">{{ bal.moneyInText }}</div></div>
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.7)">Final stacks</div><div style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums">{{ bal.stacksText }}</div></div>
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.7)">Difference</div><div style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums;color:#E05252">{{ bal.diffText }}</div></div>
+</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#F4EBDD">{{ bal.note }} Check the final stacks or approved buy-ins — settlement stays locked until they match.</div>
+</div>
+</sc-if>
+<sc-if value="{{ bal.isBalanced }}" hint-placeholder-val="{{ false }}">
+<div style="background:rgba(53,184,107,.1);border:1.5px solid #35B86B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:12px;animation:po-up .35s both">
+<div style="display:flex;gap:12px;align-items:center"><span style="width:28px;height:28px;border-radius:50%;background:#35B86B;display:grid;place-items:center;flex:none;animation:po-pop .4s both"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D0D0F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Totals balance</div></div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA;font-variant-numeric:tabular-nums">Money in {{ bal.moneyInText }} = final stacks {{ bal.stacksText }}. Ready to settle.</div>
+</div>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:8px"><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Final stacks</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Tap to enter or correct</div></div>
+<sc-for list="{{ endedRows }}" as="er" hint-placeholder-count="4">
+<button onClick="{{ er.open }}" style="display:flex;align-items:center;gap:12px;padding:12px 0;border:0;border-bottom:1px solid rgba(244,235,221,.06);border-radius:0;background:transparent;color:#F4EBDD;text-align:left;cursor:pointer;font-family:inherit;width:100%" style-hover="opacity:.8" style-active="opacity:.6">
+<div style="width:40px;height:40px;border-radius:50%;background:#26262A;display:grid;place-items:center;font-size:16px;font-weight:800;flex:none">{{ er.initial }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ er.name }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">In {{ er.investedText }} · <span style="color:{{ er.netColor }};font-weight:700">{{ er.netText }}</span></div></div>
+<sc-if value="{{ er.waiting }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#26262A;color:rgba(244,235,221,.6);flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Waiting</div></sc-if>
+<sc-if value="{{ er.submitted }}" hint-placeholder-val="{{ false }}"><div style="font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;flex:none">{{ er.stackText }}</div></sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)"><button class="btn btn-primary" onClick="{{ finalize }}" disabled="{{ bal.locked }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">SETTLE UP</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.board }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px 24px;display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px;animation:po-up .5s both">
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">{{ lb.meta }}</div>
+<div style="font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.03em">Session leaderboard</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Tonight's table, sorted by net P/L.</div>
+</div>
+<sc-if value="{{ lb.hasMe }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:20px;background:#18181B;animation:po-up .5s .1s both">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">You finished</div><div style="font-size:18px;line-height:1.3;font-weight:800">{{ lb.myPlace }}</div></div>
+<div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:{{ lb.myColor }};flex:none">{{ lb.myNet }}</div>
+</div>
+</sc-if>
+<div style="display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;gap:8px">
+<sc-for list="{{ lb.rows }}" as="r" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:14px;padding:{{ r.pad }};border-radius:20px;background:{{ r.bg }};border:1.5px solid {{ r.border }};animation:po-up .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:{{ r.delay }}">
+<div style="width:{{ r.badge }};height:{{ r.badge }};border-radius:50%;display:grid;place-items:center;flex:none;background:{{ r.rankBg }};border:1.5px solid {{ r.rankBorder }};color:#F4EBDD;font-size:15px;font-weight:900;font-variant-numeric:tabular-nums">{{ r.rankText }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;align-items:center;gap:8px;min-width:0"><span style="font-size:{{ r.nameSize }};line-height:1.3;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span><sc-if value="{{ r.isMe }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.1em;background:#C91F2D;color:#F4EBDD;flex:none">YOU</span></sc-if></div>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">In {{ r.investedText }} · Out {{ r.stackText }}</div>
+</div>
+<div style="font-size:{{ r.amtSize }};line-height:1.1;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:{{ r.color }};flex:none">{{ r.netText }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums"><span style="width:6px;height:6px;border-radius:50%;background:{{ lb.sumDot }}"></span>{{ lb.sumText }}</div>
+</div>
+<div style="flex:none;padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(244,235,221,.06)"><button class="btn btn-primary" onClick="{{ viewSettlement }}" style="height:56px;width:100%;padding:0 24px;gap:8px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">VIEW SETTLEMENT<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ is.settled }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;min-height:0;overflow-y:auto;padding:0 20px calc(24px + env(safe-area-inset-bottom));display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:max-content;align-content:start;gap:24px">
+<button onClick="{{ viewBoard }}" style="justify-self:start;height:44px;padding:0 16px 0 10px;margin-left:-4px;border-radius:999px;border:1px solid rgba(244,235,221,.2);background:transparent;color:#F4EBDD;font:800 13px Figtree,system-ui;letter-spacing:.06em;display:flex;align-items:center;gap:6px;cursor:pointer" style-hover="background:#18181B"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>LEADERBOARD</button>
+<div style="display:flex;flex-direction:column;gap:12px;animation:po-up .5s both">
+<div style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(53,184,107,.14);color:#35B86B"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Session settled</div>
+<div style="display:flex;gap:28px">
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Total pot</div><div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ res.potText }}</div></div>
+<div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Players</div><div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em">{{ res.players }}</div></div>
+</div>
+</div>
+<div style="background:#18181B;border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;animation:po-up .6s .15s both">
+<div style="position:absolute;right:-70px;bottom:-70px;width:220px;height:220px;border-radius:50%;background:{{ res.glow }}"></div>
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6);position:relative">{{ res.myName }} · your result</div>
+<div style="font-size:72px;line-height:.95;font-weight:900;letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:{{ res.myColor }};position:relative;animation:po-pop .6s .4s both">{{ res.myNetText }}</div>
+<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums;position:relative"><span>Invested {{ res.myInvested }}</span><span>Final stack {{ res.myStack }}</span></div>
+<div style="display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid rgba(244,235,221,.08);position:relative">
+<div style="display:flex;align-items:center;gap:8px;font-size:18px;line-height:1.3;font-weight:800;color:{{ res.myColor }}"><span style="width:10px;height:10px;border-radius:50%;background:{{ res.myColor }};flex:none"></span>{{ res.myVerb }}</div>
+<sc-for list="{{ res.myLines }}" as="ml" hint-placeholder-count="1">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:32px"><span style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">{{ ml.label }}</span><span style="display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums">{{ ml.amountText }}<sc-if value="{{ ml.paid }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.1em;background:rgba(53,184,107,.14);color:#35B86B">PAID</span></sc-if></span></div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;animation:po-up .6s .3s both">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-.01em">Settlement</div><div style="font-size:13px;line-height:1.4;font-weight:600;color:#D9CCBA;font-variant-numeric:tabular-nums">{{ res.progressText }}</div></div>
+<div style="height:6px;border-radius:999px;background:#26262A;overflow:hidden"><div style="height:100%;width:{{ res.pct }};background:#35B86B;border-radius:999px;transition:width .6s cubic-bezier(.2,.8,.2,1)"></div></div>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);font-variant-numeric:tabular-nums">{{ res.amountProgress }}</div>
+<sc-if value="{{ res.noPayments }}" hint-placeholder-val="{{ false }}"><div style="padding:16px;border-radius:20px;background:#18181B;font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Everyone broke even — nobody owes anything.</div></sc-if>
+<sc-for list="{{ settleRows }}" as="sr" hint-placeholder-count="2">
+<div style="background:#18181B;border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:14px;opacity:{{ sr.opacity }};transition:opacity .4s;border:1.5px solid {{ sr.border }};animation:po-up .45s both;animation-delay:{{ sr.delay }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px">
+<div style="font-size:16px;line-height:1.3;font-weight:800;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sr.fromName }}</div>
+<div style="width:48px;height:32px;border-radius:999px;background:#C91F2D;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4EBDD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+<div style="font-size:16px;line-height:1.3;font-weight:800;text-transform:uppercase;letter-spacing:.04em;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sr.toName }}</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ sr.amountText }}</div>
+<sc-if value="{{ sr.showMark }}" hint-placeholder-val="{{ false }}"><button onClick="{{ sr.mark }}" class="btn btn-secondary" style="height:44px;padding:0 16px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#F4EBDD;border-color:rgba(244,235,221,.24);flex:none">MARK AS PAID</button></sc-if>
+<sc-if value="{{ sr.showWaiting }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#26262A;color:rgba(244,235,221,.6);flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Unpaid</div></sc-if>
+<sc-if value="{{ sr.paid }}" hint-placeholder-val="{{ false }}"><button onClick="{{ sr.unmark }}" disabled="{{ sr.lockUnmark }}" aria-label="Paid — tap to undo" style="height:44px;padding:0 14px 0 10px;border-radius:999px;border:0;background:rgba(53,184,107,.14);color:#35B86B;font:800 13px Figtree,system-ui;letter-spacing:.06em;display:flex;align-items:center;gap:8px;cursor:pointer;flex:none"><span style="width:24px;height:24px;border-radius:50%;background:#35B86B;display:grid;place-items:center;animation:po-pop .4s both"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0D0D0F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>PAID</button></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px">
+<button class="btn btn-primary" onClick="{{ createAnother }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">CREATE ANOTHER GAME</button>
+<button class="btn btn-secondary" onClick="{{ shareResults }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">SHARE RESULTS</button>
+<button onClick="{{ sharePokerOut }}" style="height:44px;border:0;background:transparent;color:rgba(244,235,221,.6);font:600 13px Figtree,system-ui;cursor:pointer;text-decoration:underline;text-underline-offset:4px" style-hover="color:#F4EBDD">Share PokerOut with another group</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(0,0,0,.62);z-index:20;animation:po-fade .2s both"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:21;background:#18181B;border-radius:28px 28px 0 0;padding:10px 20px calc(20px + env(safe-area-inset-bottom));max-height:88%;overflow-y:auto;animation:po-sheet .32s cubic-bezier(.2,.8,.2,1) both;display:flex;flex-direction:column;gap:20px">
+<div style="width:40px;height:5px;border-radius:999px;background:rgba(244,235,221,.2);align-self:center;flex:none"></div>
+
+<sc-if value="{{ sh.share }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Game code</div>
+<div style="font-size:88px;line-height:1;font-weight:900;letter-spacing:.08em;font-variant-numeric:tabular-nums">{{ top.code }}</div>
+<div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Players scan the QR, open the link, or enter this code. You approve each one.</div>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<div style="width:132px;height:132px;border-radius:20px;background:#F4EBDD;display:grid;place-items:center;flex:none;overflow:hidden"><sc-if value="{{ qrSrc }}" hint-placeholder-val="{{ false }}"><img src="{{ qrSrc }}" alt="QR code to join this game" style="width:120px;height:120px;display:block;image-rendering:pixelated"></sc-if></div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Join link</div><div style="font-size:15px;line-height:1.4;font-weight:700;word-break:break-all">{{ joinUrlText }}</div></div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+<button class="btn btn-secondary" onClick="{{ copyCode }}" style="height:56px;padding:0 16px;gap:8px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>COPY LINK</button>
+<button class="btn btn-primary" onClick="{{ shareGame }}" style="height:56px;padding:0 16px;gap:8px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>SHARE</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sh.rebuy }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:24px;line-height:1.2;font-weight:900;letter-spacing:-.02em">Request rebuy</div><div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Your host approves it before it counts toward your total.</div></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Recommended</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ rebuyChips }}" as="c" hint-placeholder-count="5">
+<button onClick="{{ c.pick }}" style="height:44px;padding:0 18px;border-radius:999px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:#F4EBDD;font:800 15px Figtree,system-ui;font-variant-numeric:tabular-nums;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<button onClick="{{ rebuyCustom }}" style="height:44px;padding:0 18px;border-radius:999px;border:1.5px solid {{ rebuyCustomBorder }};background:{{ rebuyCustomBg }};color:#F4EBDD;font:800 15px Figtree,system-ui;cursor:pointer">Custom</button>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Amount — any whole rupees</span>
+<div style="position:relative"><span style="position:absolute;left:24px;top:50%;transform:translateY(-50%);font-size:28px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" ref="{{ rebuyInputRef }}" value="{{ f.rebuyAmt }}" onChange="{{ on.rebuyAmt }}" inputmode="numeric" placeholder="Enter amount" style="height:72px;padding:0 24px 0 50px;font-size:32px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums"></div>
+<sc-if value="{{ err.rebuy }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ err.rebuy }}</div></sc-if>
+</div>
+<button class="btn btn-primary" onClick="{{ requestRebuy }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">REQUEST REBUY</button>
+</sc-if>
+
+<sc-if value="{{ sh.end }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:24px;line-height:1.2;font-weight:900;letter-spacing:-.02em">End session?</div><div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA">Once the session ends, no more buy-ins or rebuys can be approved. Everyone moves to entering final stacks.</div></div>
+<sc-if value="{{ endWarn }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:20px;background:rgba(224,82,82,.14);font-size:13px;line-height:1.4;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E05252" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg><span>{{ endWarn }}</span></div></sc-if>
+<div style="display:flex;flex-direction:column;gap:12px">
+<button class="btn btn-primary" onClick="{{ endSession }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD">END SESSION</button>
+<button class="btn btn-secondary" onClick="{{ closeSheet }}" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;border-color:rgba(244,235,221,.2)">CANCEL</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sh.menu }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:4px">
+<button onClick="{{ openShare }}" style="height:56px;border:0;border-radius:20px;background:transparent;color:#F4EBDD;font:700 16px Figtree,system-ui;text-align:left;padding:0 16px;cursor:pointer" style-hover="background:#222226">Game code &amp; invite</button>
+<sc-if value="{{ canReopen }}" hint-placeholder-val="{{ false }}"><button onClick="{{ reopen }}" style="height:56px;border:0;border-radius:20px;background:transparent;color:#F4EBDD;font:700 16px Figtree,system-ui;text-align:left;padding:0 16px;cursor:pointer" style-hover="background:#222226">Reopen buy-ins</button></sc-if>
+<button onClick="{{ leave }}" style="height:56px;border:0;border-radius:20px;background:transparent;color:#E05252;font:700 16px Figtree,system-ui;text-align:left;padding:0 16px;cursor:pointer" style-hover="background:#222226">Leave game on this device</button>
+<div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6);padding:4px 16px">Leaving doesn't delete anything — rejoin with the code anytime.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sh.player }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:48px;height:48px;border-radius:50%;background:#26262A;display:grid;place-items:center;font-size:18px;font-weight:900;flex:none">{{ sel.initial }}</div>
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:24px;line-height:1.2;font-weight:900;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sel.name }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">{{ sel.sub }}</div></div>
+<div style="display:flex;flex-direction:column;gap:2px;text-align:right;flex:none"><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">Total invested</div><div style="font-size:28px;line-height:1.1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ sel.investedText }}</div></div>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-if value="{{ sel.noHistory }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;line-height:1.5;font-weight:500;color:#D9CCBA;padding:4px 0">No buy-in yet.</div></sc-if>
+<sc-for list="{{ sel.history }}" as="sh2" hint-placeholder-count="1">
+<div style="display:flex;flex-direction:column;gap:10px;padding:12px 0;border-bottom:1px solid rgba(244,235,221,.06)">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div style="font-size:16px;line-height:1.3;font-weight:700">{{ sh2.label }}</div><div style="font-size:13px;line-height:1.4;font-weight:500;color:rgba(244,235,221,.6)">{{ sh2.meta }}</div></div>
+<sc-if value="{{ sh2.hasPill }}" hint-placeholder-val="{{ false }}"><div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:{{ sh2.pill.bg }};color:{{ sh2.pill.fg }};flex:none"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>{{ sh2.pill.label }}</div></sc-if>
+<div style="font-size:18px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums;color:{{ sh2.color }};text-decoration:{{ sh2.strike }};flex:none">{{ sh2.amountText }}</div>
+<sc-if value="{{ sh2.canEdit }}" hint-placeholder-val="{{ false }}"><button onClick="{{ sh2.edit }}" aria-label="Correct amount" style="width:44px;height:44px;border-radius:50%;border:0;background:#222226;color:#F4EBDD;display:grid;place-items:center;cursor:pointer;flex:none" style-hover="background:#2A2A2F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path></svg></button></sc-if>
+</div>
+<sc-if value="{{ sh2.editing }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:8px;align-items:center">
+<div style="position:relative;flex:1;min-width:0"><span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:17px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.editVal }}" onChange="{{ on.editVal }}" inputmode="numeric" style="height:44px;padding:0 14px 0 34px;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums"></div>
+<button onClick="{{ sh2.save }}" class="btn btn-primary" style="height:44px;padding:0 16px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#F4EBDD;flex:none">SAVE</button>
+<sc-if value="{{ sh2.canVoid }}" hint-placeholder-val="{{ false }}"><button onClick="{{ sh2.void }}" class="btn btn-secondary" style="height:44px;padding:0 16px;font-size:13px;font-weight:800;letter-spacing:.06em;color:#E05252;border-color:rgba(224,82,82,.4);flex:none">REMOVE</button></sc-if>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ sel.canAdd }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Add rebuy for {{ sel.name }}</div>
+<div style="display:flex;gap:8px;align-items:center">
+<div style="position:relative;flex:1;min-width:0"><span style="position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:17px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.addAmt }}" onChange="{{ on.addAmt }}" inputmode="numeric" style="height:56px;padding:0 16px 0 40px;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums"></div>
+<button onClick="{{ addRebuy }}" class="btn btn-primary" style="height:56px;padding:0 20px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;flex:none">ADD</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sel.canStack }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,235,221,.6)">Final stack</div><div style="font-size:13px;line-height:1.4;font-weight:800;font-variant-numeric:tabular-nums;color:{{ sel.previewColor }}">{{ sel.previewText }}</div></div>
+<div style="display:flex;gap:8px;align-items:center">
+<div style="position:relative;flex:1;min-width:0"><span style="position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:800;color:rgba(244,235,221,.5)">₹</span><input class="input" value="{{ f.selStack }}" onChange="{{ on.selStack }}" inputmode="numeric" placeholder="0" style="height:56px;padding:0 16px 0 42px;font-size:22px;font-weight:900;font-variant-numeric:tabular-nums"></div>
+<button onClick="{{ saveSelStack }}" class="btn btn-primary" style="height:56px;padding:0 20px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#F4EBDD;flex:none">SAVE</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sel.canRemove }}" hint-placeholder-val="{{ false }}"><button onClick="{{ removeSel }}" class="btn btn-secondary" style="height:56px;width:100%;padding:0 24px;font-size:15px;font-weight:800;letter-spacing:.08em;color:#E05252;border-color:rgba(224,82,82,.4)">REMOVE FROM GAME</button></sc-if>
+<sc-if value="{{ err.sheet }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.4;font-weight:600;color:#E05252">{{ err.sheet }}</div></sc-if>
+</sc-if>
+</div>
+</sc-if>
+
+<div style="position:absolute;left:16px;right:16px;top:calc(16px + env(safe-area-inset-top));z-index:40;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none">
+<sc-for list="{{ toasts }}" as="t" hint-placeholder-count="0">
+<div style="max-width:100%;padding:12px 18px;border-radius:999px;background:#F4EBDD;color:#0D0D0F;font-size:13px;line-height:1.4;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,.45);display:flex;align-items:center;gap:10px;animation:po-toast .3s cubic-bezier(.2,.8,.2,1) both"><span style="width:8px;height:8px;border-radius:50%;background:{{ t.dot }};flex:none"></span>{{ t.msg }}</div>
+</sc-for>
+</div>
+
+</div>
+<sc-if value="{{ splash }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ skipSplash }}" style="position:absolute;inset:0;z-index:60;width:100%;height:100%;overflow:hidden;background:#0D0D0F;display:flex;align-items:center;justify-content:center;opacity:{{ splashOpacity }};transition:opacity .5s ease;cursor:pointer">
+<div style="width:90%;max-width:500px;display:flex;flex-direction:column;align-items:center;text-align:center">
+<div style="position:relative;width:clamp(150px,min(24cqh,52cqw),220px);aspect-ratio:1;flex:none">
+<div style="position:absolute;inset:-28%;border-radius:50%;background:radial-gradient(circle,rgba(201,31,45,.3),rgba(201,31,45,0) 62%);animation:po-halo 1.3s ease-out 1.2s both"></div>
+<div style="position:absolute;inset:-4%;border-radius:50%;border:1.5px solid rgba(244,235,221,.32);animation:po-ring 1.3s cubic-bezier(.2,.8,.2,1) 1.2s both"></div>
+<div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6);animation:po-logo-in 1.2s cubic-bezier(.2,.8,.2,1) both">
+<img src="assets/pokerout-logo.jpg" alt="PokerOut" style="position:absolute;width:125%;height:125%;left:-12.3%;top:-10.3%;max-width:none">
+<div style="position:absolute;top:-30%;bottom:-30%;left:0;width:30%;background:linear-gradient(90deg,rgba(244,235,221,0),rgba(244,235,221,.26),rgba(244,235,221,0));animation:po-sweep 1.3s cubic-bezier(.45,0,.25,1) 1.2s both"></div>
+</div>
+</div>
+<div style="margin-top:clamp(28px,4.5cqh,44px);font-size:clamp(44px,min(7cqh,14cqw),64px);line-height:1;font-weight:900;letter-spacing:-.045em;animation:po-word 1.2s cubic-bezier(.2,.8,.2,1) 2.1s both">Poker<span style="color:#C91F2D">Out</span></div>
+<div style="margin-top:clamp(12px,2cqh,18px);font-size:clamp(18px,min(2.7cqh,5.6cqw),24px);line-height:1.35;font-weight:500;color:#F4EBDD;animation:po-up 1s cubic-bezier(.2,.8,.2,1) 3.5s both">Home Games, Simplified.</div>
+<div style="margin-top:clamp(28px,5cqh,48px);font-size:clamp(13px,1.9cqh,16px);line-height:1.4;font-weight:800;letter-spacing:.3em;text-indent:.3em;color:#D9CCBA;animation:po-fade 1.2s ease both">MADE BY P.A.C</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;deviceId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;main&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;skipSplash&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const GREEN = '#35B86B', NEG = '#E05252', MUTED = 'rgba(244,235,221,.6)';
+// One status vocabulary for the whole app
+const STATUS = {
+  pending: { label: 'Pending', bg: 'rgba(217,204,186,.14)', fg: '#D9CCBA' },
+  approved: { label: 'Approved', bg: 'rgba(53,184,107,.14)', fg: GREEN },
+  rejected: { label: 'Rejected', bg: 'rgba(224,82,82,.14)', fg: NEG },
+  completed: { label: 'Paid', bg: 'rgba(53,184,107,.14)', fg: GREEN },
+  error: { label: 'Error', bg: 'rgba(224,82,82,.14)', fg: NEG },
+  waiting: { label: 'Waiting', bg: '#26262A', fg: MUTED },
+};
+const pill = (k, label) => ({ ...STATUS[k], label: label || STATUS[k].label });
+const initialOf = n => (n || '?').trim().charAt(0).toUpperCase();
+const timeOf = ts => { try { return new Date(ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } };
+const netColor = n => (n > 0 ? GREEN : n < 0 ? NEG : MUTED);
+const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+
+class Component extends DCLogic {
+  state = {
+    ready: false, splash: !this.props.skipSplash, splashOut: false,
+    route: 'home', session: null, game: null,
+    f: { gameName: '', hostName: '', buyIn: '500', rebuy: '', customRebuy: false, joinCode: '', joinName: '', buyAmt: '', rebuyAmt: '', stack: '', addAmt: '', editVal: '', selStack: '' },
+    err: {}, sheet: null, selId: null, editTxId: null, toasts: [], shown: 0,
+    online: typeof navigator === 'undefined' ? true : navigator.onLine,
+  };
+
+  get PO() { return window.PO; }
+  dev() { return this.props.deviceId || 'main'; }
+  step() { return (this.PO && this.PO.MONEY_STEP) || 100; }
+
+  componentDidMount() {
+    this.boot();
+    if (this.state.splash) {
+      this.t1 = setTimeout(() => this.setState({ splashOut: true }), 6500);
+      this.t2 = setTimeout(() => this.setState({ splash: false }), 7000);
+    }
+    this.onOnline = () => this.setState({ online: true });
+    this.onOffline = () => this.setState({ online: false });
+    window.addEventListener('online', this.onOnline);
+    window.addEventListener('offline', this.onOffline);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.t1); clearTimeout(this.t2); clearTimeout(this.bootT);
+    cancelAnimationFrame(this.raf); this.unsub && this.unsub();
+    window.removeEventListener('online', this.onOnline); window.removeEventListener('offline', this.onOffline);
+  }
+  componentDidUpdate() {
+    const t = this.heroTarget();
+    if (t !== this.animTo) { const from = this.animTo == null ? 0 : this.state.shown; this.animTo = t; this.countTo(from, t); }
+  }
+
+  boot = () => {
+    if (!window.PO) { this.bootT = setTimeout(this.boot, 40); return; }
+    this.PO.ready.then(() => {
+      const session = this.PO.getSession(this.dev());
+      if (session) this.PO.resume(session);
+      const game = session ? this.PO.getGame(session.gameCode) : null;
+      let joinCode = '';
+      try {
+        const m = location.pathname.match(/\/join\/(\d{4})/);
+        joinCode = (m ? m[1] : new URLSearchParams(location.search).get('join') || '').replace(/\D/g, '').slice(0, 4);
+      } catch (e) {}
+      this.unsub = this.PO.subscribe(this.onStore);
+      this.setState(s => ({ ready: true, session, game, route: joinCode && !session ? 'join' : 'home', fromLink: !!joinCode, f: { ...s.f, joinCode } }));
+      if (joinCode && !session) this.peek(joinCode);
+    });
+  };
+  peek(code) {
+    if (!code || code.length !== 4) return this.setState({ peekInfo: null });
+    const ask = code;
+    Promise.resolve(this.PO.peekGame(code)).then(r => {
+      if (this.state.f.joinCode !== ask) return;
+      this.setState({ peekInfo: r && r.ok ? { ok: true, text: r.gameName + (r.hostName ? ' · hosted by ' + r.hostName : '') } : { ok: false, text: (r && r.error) || '' } });
+    });
+  }
+
+  onStore = () => {
+    const s = this.state.session; if (!s) return;
+    const next = this.PO.getGame(s.gameCode);
+    if (!this.local) this.notify(this.state.game, next);
+    this.setState({ game: next });
+  };
+
+  heroTarget() {
+    const g = this.state.game, s = this.state.session;
+    if (!g || !s || !this.PO) return 0;
+    return g.hostId === s.playerId ? this.PO.totals(g).moneyIn : this.PO.investedFor(g, s.playerId);
+  }
+  countTo(from, to) {
+    cancelAnimationFrame(this.raf);
+    const start = performance.now(), d = 650;
+    const step = now => {
+      const k = Math.min(1, (now - start) / d), e = 1 - Math.pow(1 - k, 3);
+      this.setState({ shown: Math.round(from + (to - from) * e) });
+      if (k < 1) this.raf = requestAnimationFrame(step);
+    };
+    this.raf = requestAnimationFrame(step);
+  }
+
+  toast(msg, tone) {
+    const id = Math.random();
+    this.setState(s => ({ toasts: [...s.toasts.slice(-2), { id, msg, dot: tone === 'bad' ? NEG : tone === 'good' ? GREEN : '#D9CCBA' }] }));
+    setTimeout(() => this.setState(s => ({ toasts: s.toasts.filter(t => t.id !== id) })), 3000);
+  }
+
+  // Works with the synchronous preview store and the async backend alike.
+  act(fn, okMsg, onOk) {
+    if (this.busy) return null;
+    const finish = r => {
+      this.local = false; this.busy = false;
+      if (!r || !r.ok) { this.toast((r && r.error) || 'Something went wrong — nothing was changed.', 'bad'); return null; }
+      if (okMsg) this.toast(okMsg, 'good');
+      if (onOk) onOk(r);
+      return r;
+    };
+    this.local = true;
+    let r;
+    try { r = fn(this.PO); } catch (e) { console.error(e); return finish(null); }
+    if (r && typeof r.then === 'function') { this.busy = true; return r.then(finish, () => finish(null)); }
+    return finish(r);
+  }
+
+  notify(prev, next) {
+    if (!prev || !next || !this.PO) return;
+    const P = this.PO, me = this.state.session.playerId, host = next.hostId === me;
+    const nameOf = pid => (next.players.find(p => p.playerId === pid) || {}).username || 'Someone';
+    const pm = prev.players.find(p => p.playerId === me), nm = next.players.find(p => p.playerId === me);
+    if (pm && nm && pm.approved === 'pending' && nm.approved === 'approved') this.toast("You're approved — make your buy-in", 'good');
+    if (prev.status !== next.status) {
+      if (next.status === 'playing' && prev.status === 'lobby') this.toast('Game started — good luck', 'good');
+      if (next.status === 'ended') this.toast('Session ended — enter your final stack');
+      if (next.status === 'settled') this.toast('Session settled', 'good');
+      if (next.status === 'playing' && prev.status === 'ended') this.toast('Host reopened buy-ins');
+    }
+    const prevTx = {}; prev.transactions.forEach(t => (prevTx[t.transactionId] = t));
+    next.transactions.forEach(t => {
+      const o = prevTx[t.transactionId], kind = t.type === 'buy-in' ? 'Buy-in' : 'Rebuy';
+      if (t.playerId === me && o && o.status === 'pending' && t.status === 'approved') this.toast(kind + ' approved  +' + P.formatMoney(t.amount), 'good');
+      if (t.playerId === me && o && o.status === 'pending' && t.status === 'rejected' && !t.note) this.toast(kind + ' rejected by host', 'bad');
+      if (t.playerId === me && !o && t.status === 'approved' && t.type === 'rebuy') this.toast('Host added a ' + P.formatMoney(t.amount) + ' rebuy', 'good');
+      if (host && !o && t.status === 'pending') this.toast(nameOf(t.playerId) + ' · ' + kind.toLowerCase() + ' ' + P.formatMoney(t.amount));
+    });
+    if (host) next.players.forEach(p => { if (p.approved === 'pending' && !prev.players.find(q => q.playerId === p.playerId)) this.toast(p.username + ' wants to join'); });
+    const prevS = {}; (prev.settlements || []).forEach(s => (prevS[s.settlementId] = s));
+    (next.settlements || []).forEach(s => { const o = prevS[s.settlementId]; if (o && !o.paid && s.paid && s.toPlayer === me) this.toast(nameOf(s.fromPlayer) + ' paid you ' + P.formatMoney(s.amount), 'good'); });
+    if (host) next.players.forEach(p => { const a = prev.finalStacks[p.playerId], b = next.finalStacks[p.playerId]; if (b && (!a || a.amount !== b.amount) && b.enteredBy === p.playerId && p.playerId !== me) this.toast(p.username + ' entered ' + P.formatMoney(b.amount)); });
+  }
+
+  setF(k, v) { this.setState(s => ({ f: { ...s.f, [k]: v }, err: {} })); }
+  setErr(k, v) { this.setState(s => ({ err: { ...s.err, [k]: v } })); }
+  start(session, game, extra) { this.PO.setSession(this.dev(), session); this.animTo = null; this.stackPrefilled = false; this.setState({ session, game, err: {}, settledView: null, ...(extra || {}) }); }
+  money(raw) { return this.PO.parseAmount(raw, { allowZero: false, step: this.step() }); } // buy-ins: ₹100 steps
+  anyMoney(raw) { return this.PO.parseAmount(raw, { allowZero: false }); } // rebuys: any positive whole rupees
+  rebuyInputRef = React.createRef();
+  chips(values, current, key) {
+    return values.map(v => { const on = String(v) === String(current); return { label: this.PO.formatMoney(v), bg: on ? 'rgba(201,31,45,.2)' : 'transparent', border: on ? '#C91F2D' : 'rgba(244,235,221,.2)', pick: () => this.setF(key, String(v)) }; });
+  }
+
+  createGame = () => {
+    const P = this.PO, f = this.state.f;
+    const gameName = String(f.gameName || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    const username = P.cleanName(f.hostName);
+    if (!gameName) return this.setErr('create', 'Give your game a name.');
+    if (!username) return this.setErr('create', 'Enter your username.');
+    const b = this.money(f.buyIn); if (!b.ok) return this.setErr('create', 'Buy-in: ' + b.error);
+    let rebuy = b.value;
+    if (f.customRebuy) { const r = this.money(f.rebuy); if (!r.ok) return this.setErr('create', 'Rebuy: ' + r.error); rebuy = r.value; }
+    this.act(PO => PO.createGame({ gameName, username, buyIn: b.value, rebuy }), null, res => this.start(this.seatOf(res), res.game, { sheet: 'share' }));
+  };
+  seatOf(res) { return { gameCode: res.game.gameCode, playerId: res.playerId, gameId: res.gameId || res.game.gameId, secret: res.secret || null }; }
+  sampleGame = () => {
+    this.act(PO => PO.createSampleGame(), null, res => this.start(this.seatOf(res), res.game));
+  };
+  joinGame = () => {
+    if (this.busy) return;
+    const f = this.state.f;
+    this.local = true; this.busy = true;
+    Promise.resolve(this.PO.joinGame(f.joinCode, f.joinName)).then(res => {
+      this.local = false; this.busy = false;
+      if (!res || !res.ok) return this.setErr('join', (res && res.error) || "Couldn't join — try again.");
+      try { if (this.PO.mode === 'remote' && /\/join\//.test(location.pathname)) history.replaceState(null, '', '/'); } catch (e) {}
+      this.start(this.seatOf(res), res.game);
+    });
+  };
+  createAnother = () => { this.leave(); this.setState({ route: 'create' }); };
+  shareThing(payload, fallbackMsg) {
+    const text = payload.text + (payload.url ? '\n' + payload.url : '');
+    if (navigator.share) navigator.share({ title: 'PokerOut', text: payload.text, url: payload.url }).catch(() => {});
+    else this.copyText(text, fallbackMsg);
+  }
+  leave = () => { if (this.state.session) this.PO.forget(this.state.session.gameCode); this.PO.clearSession(this.dev()); this.animTo = null; this.setState({ session: null, game: null, route: 'home', sheet: null, err: {}, settledView: null }); };
+  cancelJoin = () => { const s = this.state.session; this.act(P => P.withdrawJoin(s.gameCode, s.playerId)); this.leave(); };
+
+  copyText(text, msg) {
+    const done = () => this.toast(msg, 'good');
+    const fallback = () => { try { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); done(); } catch (e) { this.toast('Copy failed — the code is ' + text, 'bad'); } };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+  qrFor(url) {
+    if (this.qrCache && this.qrCache.url === url) return this.qrCache.src;
+    if (typeof window.qrcode !== 'function') { if (!this.qrWait) this.qrWait = setTimeout(() => { this.qrWait = null; this.forceUpdate(); }, 400); return ''; }
+    try {
+      const q = window.qrcode(0, 'M'); q.addData(url); q.make();
+      const svg = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }).replace(/fill="white"/g, 'fill="#F4EBDD"').replace(/fill="black"/g, 'fill="#0D0D0F"');
+      const src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      this.qrCache = { url, src }; return src;
+    } catch (e) { return ''; }
+  }
+
+  renderVals() {
+    const P = this.PO, st = this.state, g = st.game, s = st.session, f = st.f;
+    const fm = n => (P ? P.formatMoney(n) : '₹' + n), fs = n => (P ? P.formatMoney(n, { signed: true }) : '');
+    const me = g && s ? g.players.find(p => p.playerId === s.playerId) : null;
+    const isHost = !!(g && me && g.hostId === me.playerId);
+    const seated = !!(g && me && P && P.hasBuyIn(g, me.playerId));
+    const live = g && (g.status === 'lobby' || g.status === 'playing');
+
+    let screen = 'loading', msg = null;
+    const back = { action: this.leave, actionLabel: 'BACK HOME' };
+    if (!st.ready || !P) screen = 'loading';
+    else if (!s) screen = st.route;
+    else if (g === undefined) screen = 'loading';
+    else if (!g || !me) { screen = 'message'; msg = { pill: pill('error', 'Not found'), title: 'This game no longer exists.', body: 'It may have been removed from this device. Check the code with your host.', ...back }; }
+    else if (me.approved === 'pending') { screen = 'message'; msg = { pulse: true, pill: pill('pending', 'Waiting for approval'), title: (g.players.find(p => p.playerId === g.hostId) || {}).username + ' will let you into ' + g.gameName + '.', body: "You're joining as " + me.username + '. This screen updates on its own.', action: this.cancelJoin, actionLabel: 'CANCEL REQUEST' }; }
+    else if (me.approved === 'rejected') { screen = 'message'; msg = { pill: pill('rejected', me.removed ? 'Removed' : 'Not approved'), title: me.removed ? 'The host removed you from ' + g.gameName + '.' : "The host didn't let you into " + g.gameName + '.', body: "If that's a mistake, ask them and join again.", ...back }; }
+    else if (!seated && live) screen = 'buyin';
+    else if (!seated) { screen = 'message'; msg = { pill: pill('waiting', 'Not seated'), title: 'You didn’t buy in to this game.', body: 'The session ended before your buy-in was recorded, so you have nothing to settle.', ...back }; }
+    else if (live) screen = isHost ? 'hostLive' : 'playerLive';
+    else if (g.status === 'ended') screen = isHost ? 'hostEnded' : 'playerEnded';
+    else screen = st.settledView === 'settle' ? 'settled' : 'board';
+
+    const is = {}; ['loading', 'home', 'create', 'join', 'message', 'buyin', 'hostLive', 'playerLive', 'hostEnded', 'playerEnded', 'board', 'settled'].forEach(k => (is[k] = screen === k));
+    const inGame = ['buyin', 'hostLive', 'playerLive', 'hostEnded', 'playerEnded', 'board', 'settled'].includes(screen);
+    if (msg) { msg.align = msg.pulse ? 'center' : 'flex-start'; msg.textAlign = msg.pulse ? 'center' : 'left'; }
+    const on = {}; Object.keys(f).forEach(k => (on[k] = e => { const v = k === 'joinCode' ? e.target.value.replace(/\D/g, '').slice(0, 4) : e.target.value; this.setF(k, v); if (k === 'joinCode') this.peek(v); }));
+
+    const base = {
+      is, inGame, f, on, err: st.err, toasts: st.toasts, offline: !st.online, msg: msg || { pill: {} }, lb: { rows: [] },
+      viewSettlement: () => this.setState({ settledView: 'settle' }), viewBoard: () => this.setState({ settledView: 'board' }),
+      splash: st.splash, splashOpacity: st.splashOut ? 0 : 1,
+      skipSplash: () => { clearTimeout(this.t1); clearTimeout(this.t2); this.setState({ splashOut: true }); setTimeout(() => this.setState({ splash: false }), 450); },
+      goCreate: () => this.setState({ route: 'create', err: {} }),
+      goJoin: () => this.setState({ route: 'join', err: {} }),
+      goHome: () => this.setState({ route: 'home', err: {} }),
+      createGame: this.createGame, joinGame: this.joinGame, sampleGame: this.sampleGame, leave: this.leave, createAnother: this.createAnother,
+      showSample: !P || P.mode !== 'remote',
+      joinTitle: st.fromLink ? 'Join PokerOut' : 'Join a game',
+      peekOk: !!(st.peekInfo && st.peekInfo.ok), peekBad: !!(st.peekInfo && !st.peekInfo.ok && st.peekInfo.text), peekText: st.peekInfo ? st.peekInfo.text : '',
+      sharePokerOut: () => this.shareThing({ text: 'Try PokerOut — Home Games, Simplified.', url: P ? P.homeUrl() : '' }, 'PokerOut link copied'),
+      buyInChips: P ? this.chips([100, 200, 500, 1000], f.buyIn, 'buyIn') : [],
+      rebuyNote: f.customRebuy ? 'Players can still request other amounts.' : 'Same as the buy-in' + (P && this.money(f.buyIn).ok ? ' · ' + fm(this.money(f.buyIn).value) : ''),
+      rebuyToggleLabel: f.customRebuy ? 'USE BUY-IN' : 'CHANGE',
+      toggleRebuy: () => this.setState(x => ({ f: { ...x.f, customRebuy: !x.f.customRebuy, rebuy: x.f.rebuy || x.f.buyIn }, err: {} })),
+      sheetOpen: !!st.sheet, sh: { share: st.sheet === 'share', rebuy: st.sheet === 'rebuy', end: st.sheet === 'end', menu: st.sheet === 'menu', player: st.sheet === 'player' },
+      closeSheet: () => this.setState({ sheet: null, editTxId: null, err: {} }),
+      top: {}, stages: [], bi: {}, buyChips: [], host: { stats: [] }, requests: [], playerRows: [], mine: {}, myHistory: [], table: { names: [] },
+      bal: {}, endedRows: [], res: { myLines: [] }, settleRows: [], resultRows: [], sel: { history: [] }, rebuyChips: [], endWarn: '', canReopen: false,
+    };
+    if (!g || !me || !P) return base;
+
+    const code = g.gameCode, myId = me.playerId;
+    const nameOf = pid => (g.players.find(p => p.playerId === pid) || {}).username || '—';
+    const T = P.totals(g);
+    const hostName = nameOf(g.hostId);
+    const stageIdx = { lobby: 0, playing: 1, ended: 2, settled: 3 }[g.status];
+    base.stages = ['Buy-in', 'Play', 'Stacks', 'Settle'].map((label, i) => ({ label, bar: i < stageIdx ? '#8F1520' : i === stageIdx ? '#C91F2D' : '#26262A', color: i === stageIdx ? '#F4EBDD' : 'rgba(244,235,221,.45)' }));
+    base.top = { gameName: g.gameName, code, roleText: isHost ? 'You’re hosting' : 'Playing as ' + me.username };
+    base.openShare = () => this.setState({ sheet: 'share' });
+    base.openMenu = () => this.setState({ sheet: 'menu' });
+    const joinUrl = P.joinUrl(code);
+    base.joinUrlText = joinUrl.replace(/^https?:\/\//, '');
+    base.qrSrc = this.qrFor(joinUrl);
+    base.copyCode = () => this.copyText(joinUrl, 'Invite link copied');
+    base.shareGame = () => this.shareThing({ text: 'Join my PokerOut game 🎰\nGame: ' + g.gameName + '\nGame Code: ' + code, url: joinUrl }, 'Invite copied — paste it anywhere');
+    base.shareResults = () => this.shareThing({ text: 'PokerOut session complete 🎰\n' + g.gameName + '\n' + plural(P.seatedPlayers(g).length, 'player') + ' • Session settled\nPlay. Cash out. Settle.', url: P.homeUrl() }, 'Share text copied');
+    base.canReopen = isHost && g.status === 'ended';
+    base.reopen = () => { this.act(P => P.reopenSession(code, myId), 'Buy-ins reopened', () => this.setState({ sheet: null })); };
+
+    const myPending = g.transactions.find(t => t.playerId === myId && t.status === 'pending');
+    base.cancelMyPending = () => myPending && this.act(P => P.cancelRebuy(code, myId, myPending.transactionId), 'Request cancelled');
+
+    // --- initial buy-in (player approved, not yet seated)
+    const lastBuy = g.transactions.filter(t => t.playerId === myId && t.type === 'buy-in').slice(-1)[0];
+    base.bi = { hostName, pending: !!myPending, pendingText: myPending ? fm(myPending.amount) : '', choosing: !myPending, wasRejected: !myPending && lastBuy && lastBuy.status === 'rejected' };
+    if (screen === 'buyin' && f.buyAmt === '' && !this.buyPrefilled) { this.buyPrefilled = true; setTimeout(() => this.setF('buyAmt', String(g.defaultBuyIn)), 0); }
+    const presets = base0 => [...new Set([base0, base0 * 2, base0 * 3])];
+    base.buyChips = this.chips(presets(g.defaultBuyIn), f.buyAmt, 'buyAmt');
+    base.buyIn = () => { const a = this.money(this.state.f.buyAmt); if (!a.ok) return this.setErr('buy', a.error); this.act(P => P.requestBuyIn(code, myId, a.value), 'Buy-in sent — waiting for ' + hostName); };
+
+    const histRows = (pid, hostCtl) => g.transactions.filter(t => t.playerId === pid && t.status !== 'cancelled').map(t => {
+      const pending = t.status === 'pending', rejected = t.status === 'rejected';
+      const label = t.type === 'buy-in' ? 'Initial buy-in' : 'Rebuy';
+      const meta = (rejected && t.note ? t.note + ' · ' : t.edited ? 'Corrected · ' : '') + timeOf(t.timestamp);
+      const row = { label, meta, amountText: '+' + fm(t.amount), color: pending || rejected ? MUTED : GREEN, strike: rejected ? 'line-through' : 'none',
+        hasPill: pending || rejected, pill: pending ? pill('pending') : pill('rejected') };
+      if (hostCtl) {
+        row.canEdit = t.status === 'approved' && g.status !== 'settled';
+        row.editing = st.editTxId === t.transactionId;
+        row.canVoid = t.type === 'rebuy';
+        row.edit = () => this.setState(x => ({ editTxId: x.editTxId === t.transactionId ? null : t.transactionId, f: { ...x.f, editVal: String(t.amount) }, err: {} }));
+        row.save = () => { const a = t.type === 'rebuy' ? this.anyMoney(this.state.f.editVal) : this.money(this.state.f.editVal); if (!a.ok) return this.setErr('sheet', a.error); this.act(P => P.editTx(code, myId, t.transactionId, a.value), 'Amount corrected', () => this.setState({ editTxId: null })); };
+        row.void = () => { this.act(P => P.voidTx(code, myId, t.transactionId), 'Rebuy removed', () => this.setState({ editTxId: null })); };
+      }
+      return row;
+    });
+    const openPlayer = pid => () => {
+      const x = g.finalStacks[pid];
+      this.setState(y => ({ sheet: 'player', selId: pid, editTxId: null, err: {}, f: { ...y.f, addAmt: String(g.defaultRebuy), selStack: x && x.submitted ? String(x.amount) : '' } }));
+    };
+
+    // --- host dashboard (lobby + playing)
+    const approvedPs = g.players.filter(p => p.approved === 'approved');
+    const seatedPs = P.seatedPlayers(g);
+    const lobby = g.status === 'lobby', playing = g.status === 'playing';
+    const notBought = approvedPs.filter(p => !P.hasBuyIn(g, p.playerId));
+    const reqN = T.pendingPlayers.length + T.pendingRebuys.length;
+    base.host = {
+      lobby, playing, moneyInText: fm(st.shown), hasRequests: reqN > 0, requestCount: plural(reqN, 'request'),
+      cantStart: notBought.length > 0 || seatedPs.length < 2,
+      footNote: lobby ? (notBought.length ? 'Waiting for ' + notBought.map(p => p.username).join(', ') + ' to buy in' : seatedPs.length < 2 ? 'Approve at least one more player to start' : 'Everyone’s bought in — start when ready') : '',
+      stats: lobby
+        ? [{ label: 'Bought in', value: seatedPs.length + ' / ' + approvedPs.length, color: '#F4EBDD' }, { label: 'Buy-in', value: fm(g.defaultBuyIn), color: '#F4EBDD' }, { label: 'To approve', value: reqN, color: reqN ? '#C91F2D' : '#F4EBDD' }]
+        : [{ label: 'Players', value: seatedPs.length, color: '#F4EBDD' }, { label: 'Rebuys', value: T.approvedRebuys, color: '#F4EBDD' }, { label: 'To approve', value: reqN, color: reqN ? '#C91F2D' : '#F4EBDD' }],
+    };
+    base.requests = [
+      ...T.pendingPlayers.map(p => ({ name: p.username, initial: initialOf(p.username), kind: 'Wants to join', amountText: '',
+        approve: () => this.act(P => P.decidePlayer(code, myId, p.playerId, true), p.username + ' approved'),
+        reject: () => this.act(P => P.decidePlayer(code, myId, p.playerId, false), p.username + ' rejected') })),
+      ...T.pendingRebuys.map(t => ({ name: nameOf(t.playerId), initial: initialOf(nameOf(t.playerId)), kind: t.type === 'buy-in' ? 'Buy-in' : 'Rebuy', amountText: fm(t.amount),
+        approve: () => this.act(P => P.decideTx(code, myId, t.transactionId, true), nameOf(t.playerId) + ' +' + fm(t.amount)),
+        reject: () => this.act(P => P.decideTx(code, myId, t.transactionId, false), (t.type === 'buy-in' ? 'Buy-in' : 'Rebuy') + ' rejected') })),
+    ];
+    base.playerRows = approvedPs.map(p => {
+      const sm = P.playerSummary(g, p.playerId), bought = P.hasBuyIn(g, p.playerId);
+      const pend = g.transactions.find(t => t.playerId === p.playerId && t.status === 'pending' && t.type === 'buy-in');
+      return { name: p.username + (p.playerId === g.hostId ? ' · Host' : ''), initial: initialOf(p.username), ring: p.playerId === g.hostId ? '0 0 0 2px #C91F2D' : 'none',
+        sub: bought ? (sm.rebuys ? '1 buy-in · ' + plural(sm.rebuys, 'rebuy') : 'Buy-in') : pend ? 'Buy-in ' + fm(pend.amount) + ' to confirm' : 'Approved · no buy-in yet',
+        hasMoney: bought, investedText: fm(sm.invested), hasPill: !bought, pill: pend ? pill('pending') : pill('waiting'), open: openPlayer(p.playerId) };
+    });
+    base.startGame = () => this.act(P => P.startGame(code, myId), 'Game started — rebuys are open');
+    base.endWarn = [T.pendingRebuys.length ? plural(T.pendingRebuys.length, 'pending money request') + ' will be rejected.' : '', T.pendingPlayers.length ? plural(T.pendingPlayers.length, 'join request') + ' will be rejected.' : '', notBought.length ? notBought.map(p => p.username).join(', ') + ' never bought in and won’t be settled.' : ''].filter(Boolean).join(' ');
+    base.openEnd = () => this.setState({ sheet: 'end' });
+    base.endSession = () => { this.act(P => P.endSession(code, myId), 'Session ended — collect final stacks', () => this.setState({ sheet: null })); };
+
+    // --- player dashboard
+    const mySum = P.playerSummary(g, myId);
+    const myFs = g.finalStacks[myId];
+    const bc = P.balanceCheck(g);
+    const draft = P.parseAmount(f.stack);
+    const previewNet = draft.ok ? draft.value - mySum.invested : null;
+    const myPendingRebuy = myPending && myPending.type === 'rebuy' ? myPending : null;
+    base.mine = {
+      lobby, playing, hostName,
+      investedText: fm(isHost ? mySum.invested : st.shown), investedExact: fm(mySum.invested),
+      countText: (mySum.rebuys ? '1 buy-in · ' + plural(mySum.rebuys, 'rebuy') : 'Initial buy-in') + ' · confirmed by ' + hostName,
+      hasPending: !!myPendingRebuy, pendingText: myPendingRebuy ? fm(myPendingRebuy.amount) : '',
+      rebuyLabel: myPendingRebuy ? 'REBUY PENDING' : 'REQUEST REBUY',
+      submitted: !!(myFs && myFs.submitted), stackText: myFs ? fm(myFs.amount) : '',
+      stacksIn: bc.submitted + ' of ' + bc.expected + ' stacks in',
+      submitLabel: myFs && myFs.submitted ? 'UPDATE FINAL STACK' : 'SUBMIT FINAL STACK',
+      previewText: previewNet == null ? '—' : fs(previewNet), previewColor: previewNet == null ? MUTED : netColor(previewNet),
+    };
+    base.myHistory = histRows(myId, false);
+    base.table = { count: seatedPs.length, totalText: fm(T.moneyIn), names: seatedPs.map(p => ({ name: p.username })) };
+    base.openRebuy = () => this.setState(x => ({ sheet: 'rebuy', err: {}, f: { ...x.f, rebuyAmt: String(g.defaultRebuy) } }));
+    const rebuyPresets = [...new Set([100, 200, 500, 1000, 1500, g.defaultRebuy].filter(v => v % 100 === 0))].sort((a, b) => a - b);
+    base.rebuyChips = this.chips(rebuyPresets, f.rebuyAmt, 'rebuyAmt');
+    const isPreset = rebuyPresets.some(v => String(v) === f.rebuyAmt);
+    base.rebuyCustomBg = !isPreset ? 'rgba(201,31,45,.2)' : 'transparent';
+    base.rebuyCustomBorder = !isPreset ? '#C91F2D' : 'rgba(244,235,221,.2)';
+    base.rebuyInputRef = this.rebuyInputRef;
+    base.rebuyCustom = () => { this.setF('rebuyAmt', ''); setTimeout(() => this.rebuyInputRef.current && this.rebuyInputRef.current.focus(), 0); };
+    base.requestRebuy = () => { const a = this.anyMoney(this.state.f.rebuyAmt); if (!a.ok) return this.setErr('rebuy', a.error); this.act(P => P.requestRebuy(code, myId, a.value), fm(a.value) + ' rebuy sent — waiting for host', () => this.setState({ sheet: null })); };
+    base.submitMyStack = () => { const a = P.parseAmount(this.state.f.stack); if (!a.ok) return this.setErr('stack', a.error); this.act(P => P.submitStack(code, myId, myId, a.value), 'Final stack saved'); };
+    if (screen === 'playerEnded' && myFs && myFs.submitted && f.stack === '' && !this.stackPrefilled) { this.stackPrefilled = true; setTimeout(() => this.setF('stack', String(myFs.amount)), 0); }
+
+    // --- host, final stacks
+    const bstate = !bc.allSubmitted ? 'incomplete' : bc.diff !== 0 ? 'mismatch' : 'balanced';
+    base.bal = {
+      isIncomplete: bstate === 'incomplete', isMismatch: bstate === 'mismatch', isBalanced: bstate === 'balanced', locked: bstate !== 'balanced',
+      headline: bc.submitted + ' of ' + bc.expected + ' stacks in', pct: (bc.expected ? Math.round((bc.submitted / bc.expected) * 100) : 0) + '%',
+      moneyInText: fm(bc.moneyIn), stacksText: fm(bc.stacksTotal), diffText: fm(Math.abs(bc.diff)),
+      note: bc.diff < 0 ? 'Final stacks are ' + fm(-bc.diff) + ' short.' : 'Final stacks are ' + fm(bc.diff) + ' over.',
+    };
+    base.endedRows = seatedPs.map(p => { const sm = P.playerSummary(g, p.playerId); return {
+      name: p.username, initial: initialOf(p.username), investedText: fm(sm.invested),
+      waiting: sm.stack == null, submitted: sm.stack != null, stackText: sm.stack == null ? '' : fm(sm.stack),
+      netText: sm.net == null ? 'no stack yet' : fs(sm.net), netColor: sm.net == null ? MUTED : netColor(sm.net), open: openPlayer(p.playerId) }; });
+    base.finalize = () => this.act(P => P.finalize(code, myId));
+
+    // --- selected player sheet (host)
+    if (st.sheet === 'player' && st.selId) {
+      const pid = st.selId, sm = P.playerSummary(g, pid), sd = P.parseAmount(f.selStack), pv = sd.ok ? sd.value - sm.invested : null;
+      const bought = P.hasBuyIn(g, pid);
+      const hist = histRows(pid, isHost);
+      base.sel = { name: nameOf(pid), initial: initialOf(nameOf(pid)), investedText: fm(sm.invested),
+        sub: (pid === g.hostId ? 'Host' : 'Player') + (sm.rebuys ? ' · ' + plural(sm.rebuys, 'rebuy') : ''), history: hist, noHistory: hist.length === 0,
+        canAdd: isHost && playing && bought, canStack: isHost && g.status === 'ended' && bought,
+        canRemove: isHost && live && !bought && pid !== g.hostId,
+        previewText: pv == null ? '' : 'P/L ' + fs(pv), previewColor: pv == null ? MUTED : netColor(pv) };
+      base.addRebuy = () => { const a = this.anyMoney(this.state.f.addAmt); if (!a.ok) return this.setErr('sheet', a.error); this.act(P => P.addRebuy(code, myId, pid, a.value), nameOf(pid) + ' +' + fm(a.value)); };
+      base.saveSelStack = () => { const a = P.parseAmount(this.state.f.selStack); if (!a.ok) return this.setErr('sheet', a.error); this.act(P => P.submitStack(code, myId, pid, a.value), nameOf(pid) + ' · ' + fm(a.value), () => this.setState({ sheet: null })); };
+      base.removeSel = () => { this.act(P => P.removePlayer(code, myId, pid), nameOf(pid) + ' removed', () => this.setState({ sheet: null })); };
+    }
+
+    // --- settled
+    if (g.status === 'settled') {
+      const sts = g.settlements || [];
+      const paid = sts.filter(x => x.paid), total = sts.reduce((a, x) => a + x.amount, 0), paidAmt = paid.reduce((a, x) => a + x.amount, 0);
+      const myNet = mySum.net || 0;
+      const mine = sts.filter(x => x.fromPlayer === myId || x.toPlayer === myId);
+      base.res = {
+        potText: fm(T.moneyIn), players: seatedPs.length, myName: me.username,
+        myNetText: fs(myNet), myColor: netColor(myNet), glow: myNet > 0 ? 'rgba(53,184,107,.12)' : myNet < 0 ? 'rgba(224,82,82,.12)' : 'rgba(244,235,221,.05)',
+        myInvested: fm(mySum.invested), myStack: fm(mySum.stack || 0),
+        myVerb: myNet > 0 ? 'You receive ' + fm(myNet) : myNet < 0 ? 'You owe ' + fm(-myNet) : 'You broke even',
+        myLines: mine.map(x => ({ label: x.fromPlayer === myId ? 'to ' + nameOf(x.toPlayer) : 'from ' + nameOf(x.fromPlayer), amountText: fm(x.amount), paid: x.paid })),
+        progressText: paid.length + ' / ' + plural(sts.length, 'payment') + ' done', pct: (sts.length ? Math.round((paid.length / sts.length) * 100) : 100) + '%',
+        amountProgress: fm(paidAmt) + ' / ' + fm(total) + ' settled', noPayments: sts.length === 0,
+      };
+      base.settleRows = sts.map((x, i) => {
+        const canAct = isHost || x.fromPlayer === myId;
+        return { fromName: nameOf(x.fromPlayer), toName: nameOf(x.toPlayer), amountText: fm(x.amount), paid: x.paid, showMark: !x.paid && canAct, showWaiting: !x.paid && !canAct,
+          opacity: x.paid ? 0.6 : 1, border: x.fromPlayer === myId || x.toPlayer === myId ? 'rgba(201,31,45,.55)' : 'transparent', delay: 0.35 + i * 0.08 + 's',
+          lockUnmark: !canAct,
+          mark: () => this.act(P => P.setPaid(code, myId, x.settlementId, true), 'Marked as paid'),
+          unmark: () => canAct && this.act(P => P.setPaid(code, myId, x.settlementId, false), 'Marked as unpaid') };
+      });
+      const board = P.leaderboard(g), meRow = board.find(r => r.playerId === myId);
+      const sumNet = board.reduce((a, r) => a + r.net, 0);
+      const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
+      const tied = r => board.filter(x => x.rank === r.rank).length > 1;
+      base.lb = {
+        meta: g.gameName + ' · ' + plural(board.length, 'player') + ' · ' + fm(T.moneyIn) + ' pot',
+        hasMe: !!meRow, myPlace: meRow ? (tied(meRow) ? 'Tied ' : '') + ord(meRow.rank) + ' of ' + board.length : '',
+        myNet: meRow ? fs(meRow.net) : '', myColor: meRow ? netColor(meRow.net) : MUTED,
+        sumText: sumNet === 0 ? 'Net P/L across the table sums to ' + fm(0) + ' · balanced' : 'Net P/L sums to ' + fs(sumNet) + ' — check stacks',
+        sumDot: sumNet === 0 ? GREEN : NEG,
+        rows: board.map((r, i) => {
+          const top = r.rank === 1, podium = r.rank <= 3, isMe = r.playerId === myId;
+          return { name: r.username, isMe, rankText: String(r.rank).padStart(2, '0'), netText: fs(r.net), color: netColor(r.net),
+            investedText: fm(r.invested), stackText: fm(r.stack),
+            bg: top ? 'linear-gradient(135deg, rgba(201,31,45,.22), #18181B 70%)' : podium || isMe ? '#18181B' : 'transparent',
+            border: top ? 'rgba(201,31,45,.6)' : isMe ? 'rgba(244,235,221,.28)' : podium ? 'rgba(244,235,221,.08)' : 'rgba(244,235,221,.05)',
+            rankBg: top ? '#C91F2D' : podium ? '#26262A' : 'transparent', rankBorder: top ? '#C91F2D' : podium ? 'rgba(244,235,221,.35)' : 'rgba(244,235,221,.14)',
+            badge: top ? '44px' : '36px', pad: top ? '18px 18px 18px 16px' : '12px 16px 12px 14px',
+            nameSize: top ? '20px' : '16px', amtSize: top ? '28px' : '18px', delay: 0.15 + i * 0.06 + 's' };
+        }),
+      };
+      base.resultRows = seatedPs.map(p => ({ p, sm: P.playerSummary(g, p.playerId) })).sort((a, b) => b.sm.net - a.sm.net)
+        .map(({ p, sm }) => ({ name: p.username + (p.playerId === myId ? ' (you)' : ''), investedText: fm(sm.invested), stackText: fm(sm.stack || 0), netText: fs(sm.net || 0), color: netColor(sm.net || 0) }));
+    }
+    return base;
+  }
+}
+</script>
+</body>
+</html>

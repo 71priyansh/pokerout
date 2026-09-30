@@ -1,0 +1,12 @@
+{
+  "name": "pokerout",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PokerOut — Home Games, Simplified.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npx --yes serve -s . -l 3000"
+  },
+  "engines": { "node": ">=18" }
+}

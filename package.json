@@ -5,7 +5,7 @@
   "description": "PokerOut — Home Games, Simplified.",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node build.mjs",
     "start": "npx --yes serve -s . -l 3000"
   },
   "engines": { "node": ">=18" }
